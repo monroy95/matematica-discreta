@@ -1,12 +1,17 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="nav" class="texto">
+    |
+    <router-link to="/">MCD</router-link> |
+    <router-link to="/grafos">GRAFOS</router-link>
+    |
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -21,7 +26,8 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: rgb(167, 167, 167);
+  font-size: 20px;
 }
 
 #nav a.router-link-exact-active {
