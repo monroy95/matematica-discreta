@@ -1,36 +1,124 @@
 <template>
   <div class="hello container texto mt-4">
-    
-    <p class="texto justificar"><img class="me-2" alt="Ecuclides" src="../assets/img/Euclides.png" />Euclides (en griego Εὐκλείδης, Eukleidēs, latín Euclīdēs) fue un matemático y geómetra griego (ca. 325 a. C.-ca. 265 a. C.). Se le conoce como "el padre de la geometría". Fue un activo en Alejandría (antiguo Egipto) en tiempos de Ptolomeo I Sóter (323 – 283 a. C.), Fue el fundador de la escuela de matemáticas de la ciudad.</p>
-    
-    <form class="row g-3 mt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Algoritmo de Euclides<span>&#160;</span></h2>
+      </div>
+      <div class="col-md-12 mt-4">
+        <p class="texto justificar">
+          <img
+            class="me-2"
+            alt="Ecuclides"
+            src="../assets/img/Euclides.png"
+          />Euclides (en griego Εὐκλείδης, Eukleidēs, latín Euclīdēs) fue un
+          matemático y geómetra griego (ca. 325 a. C.-ca. 265 a. C.). Se le
+          conoce como "el padre de la geometría". Fue un activo en Alejandría
+          (antiguo Egipto) en tiempos de Ptolomeo I Sóter (323 – 283 a. C.), Fue
+          el fundador de la escuela de matemáticas de la ciudad.
+        </p>
+      </div>
+    </div>
+
+    <form class="row g-3 mt-3" @submit.prevent="calculate">
       <div class="col-md-6">
         <label for="inputN1" class="form-label">Número 1</label>
-        <input type="text" class="form-control" id="inputN1" />
+        <input
+          type="number"
+          class="form-control"
+          id="inputN1"
+          required
+          v-model.number="n1"
+        />
       </div>
 
       <div class="col-md-6">
         <label for="inputN2" class="form-label">Número 2</label>
-        <input type="text" class="form-control" id="inputN2" />
+        <input
+          type="number"
+          class="form-control"
+          id="inputN2"
+          required
+          v-model.number="n2"
+        />
+      </div>
+
+      <div class="col-12" v-if="n1 && n2">
+        <p class="text-center mt-2 fw-bolder resu">
+          El MCD de {{ n1 }} y {{ n2 }} es <b class="resultado">{{ res }}</b>
+        </p>
       </div>
 
       <div class="col-12">
-        <label for="inputRes" class="form-label">Resultado</label>
-        <input type="text" class="form-control" id="inputRes" />
-      </div>
-
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Calcular</button>
+        <button type="submit" class="btn btn-primary mt-3">
+          <span v-if="recalcular">VOLVER A CALCULAR EL MCD</span>
+          <span v-else>CALCULAR EL MCD</span>
+        </button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
+
 export default {
   name: "MCD",
   props: {
     msg: String,
+  },
+  data() {
+    return {
+      n1: null,
+      n2: null,
+      res: null,
+      repetir: true,
+      recalcular: false,
+    };
+  },
+  setup() {
+    // instanciamos
+    const toast = useToast();
+    // Retornamos para que sea reutilizable
+    return { toast };
+  },
+  methods: {
+    calculate() {
+      console.log("Presiono calcular");
+      // a = qb + r
+      // a es el dividendo
+      // b es el divisor
+      // q es el cociente
+      // r es el residuo
+      let a = this.n1;
+      let b = this.n2;
+
+      if (this.n1 !== 0 && this.n2 !== 0) {
+        let temporal; //Para no perder b que contendra los residuos hasta que sean cero
+
+        while (b !== 0) {
+          temporal = b; // Divisor
+          b = a % b; // Guarda el residuo
+          a = temporal; // Dividendo
+        }
+        this.res = a;
+        this.recalcular = true; //
+
+        this.toast.success(`EL MCD de ${this.n1} y ${this.n2} es ${this.res}`, {
+          timeout: 6000,
+        });
+      } else {
+        this.toast.error(
+          "N1 y N2 deben ser enteros positivos y diferentes de 0",
+          {
+            timeout: 6000,
+          }
+        );
+
+        this.n1 = null;
+        this.n2 = null;
+        this.res = null;
+      }
+    },
   },
 };
 </script>
@@ -40,14 +128,7 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+
 a {
   color: #42b983;
 }
@@ -64,8 +145,48 @@ img {
   float: left;
 }
 
-.justificar{
+.justificar {
   text-align: justify;
   text-justify: inter-word;
+}
+
+h2 {
+  position: relative;
+  float: left;
+  background: tomato;
+  color: #fff;
+  font-size: 2.5em;
+}
+
+h2 span {
+  position: absolute;
+  right: 0;
+  width: 0;
+  background: tomato;
+  border-left: 1px solid #000;
+  /* animation: escribir 10s steps(30) infinite alternate;  DESCOMENTAR PARA EFECTO MAQUINA ESCRIBIR*/
+}
+
+@keyframes escribir {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.resu {
+  font-size: 20px;
+}
+
+.resultado {
+  color: #42b983;
 }
 </style>

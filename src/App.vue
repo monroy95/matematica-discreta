@@ -4,13 +4,18 @@
     <router-link to="/">MCD</router-link> |
     <router-link to="/grafos">GRAFOS</router-link>
     |
+    <div class="content">
+      <div class="content__container">
+        <p class="content__container__text">By: monroy95</p>
+      </div>
+    </div>
   </div>
+
   <router-view />
 </template>
 
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

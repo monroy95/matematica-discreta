@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <MCD msg="Welcome to Your Vue.js App" />
+    <MCD />
   </div>
 </template>
 
