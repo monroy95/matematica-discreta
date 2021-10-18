@@ -10,11 +10,19 @@
             class="me-2"
             alt="Ecuclides"
             src="../assets/img/Euclides.png"
-          />Euclides (en griego Εὐκλείδης, Eukleidēs, latín Euclīdēs) fue un
-          matemático y geómetra griego (ca. 325 a. C.-ca. 265 a. C.). Se le
-          conoce como "el padre de la geometría". Fue un activo en Alejandría
-          (antiguo Egipto) en tiempos de Ptolomeo I Sóter (323 – 283 a. C.), Fue
-          el fundador de la escuela de matemáticas de la ciudad.
+          />Sean a y b enteros positivos, entonces el máximo divisor común, MCD,
+          de a y b es el último residuo no cero de la aplicación sucesiva del
+          algoritmo de Euclides.
+        </p>
+        <p class="texto justificar">
+          Algoritmo de Euclides/Algoritmo de la División:
+          <span class="fw-bolder resultado resu">a = qb + r</span>
+        </p>
+        <p class="texto justificar">
+          Donde: <span class="fw-bolder resultado">a</span> es el dividendo,
+          <span class="fw-bolder resultado">b</span> es el divisor,
+          <span class="fw-bolder resultado">q</span> es el cociente,
+          <span class="fw-bolder resultado">r</span> es el residuo
         </p>
       </div>
     </div>
@@ -50,7 +58,9 @@
 
       <div class="col-12">
         <button type="submit" class="btn btn-primary mt-3">
-          <span v-if="recalcular">VOLVER A CALCULAR EL MCD</span>
+          <span v-if="recalcular" @click="reiniciar"
+            >VOLVER A CALCULAR EL MCD</span
+          >
           <span v-else>CALCULAR EL MCD</span>
         </button>
       </div>
@@ -118,6 +128,12 @@ export default {
         this.n2 = null;
         this.res = null;
       }
+    },
+    reiniciar() {
+      this.n1 = null;
+      this.n2 = null;
+      this.res = null;
+      this.recalcular = false;
     },
   },
 };
