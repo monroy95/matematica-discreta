@@ -6,8 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import "./assets/css/main.css";
 
-// LIbreria para mostrar popups
+// Libreria para mostrar popups
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
-createApp(App).use(store).use(router).use(Toast).mount('#app')
+// Libreria para dibujar grafos
+import VNetworkGraph from "v-network-graph"
+import "v-network-graph/lib/style.css"
+
+createApp(App).use(store).use(router).use(Toast).use(VNetworkGraph).mount('#app')

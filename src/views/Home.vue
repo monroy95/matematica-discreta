@@ -1,20 +1,17 @@
 <template>
-  <div class="home">
+  <div>
     <MCD />
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import MCD from "@/components/MCD.vue";
+<script lang="ts">
+import { defineComponent } from "vue";
+import MCD from "../components/MCD.vue"; // @ is an alias to /src
 
-export default {
+export default defineComponent({
   name: "Home",
   components: {
     MCD,
   },
-};
+});
 </script>
-
-<style scoped>
-</style>
