@@ -6,7 +6,7 @@
     |
     <div class="content">
       <div class="content__container">
-        <p class="content__container__text">By: monroy95</p>
+        <p class="content__container__text mt-2">By: monroy95</p>
       </div>
     </div>
   </div>

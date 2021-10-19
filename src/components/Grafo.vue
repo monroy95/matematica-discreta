@@ -2,10 +2,10 @@
   <!-- test -->
   <p class="mt-4 texto">
     Con la rueda central del mouse puede acercar o alejar el Grafo, tambien
-    puede ordenar el arrastrando cada vertice
+    puede cambiar las posiciones arrastrando cada vertice.
   </p>
   <p class="resultado">Conjunto Aristas: {{ aristasConj }}</p>
-  <code>{{ datosOk }}</code>
+  <!-- <code>{{ datosOk }}</code> -->
   <v-network-graph
     class="texto"
     :nodes="nodes"
@@ -20,6 +20,7 @@ import { defineComponent } from "vue";
 import { Layouts } from "v-network-graph";
 import { UserConfigs, NodeLabelDirection } from "v-network-graph";
 
+// Para renderizar el grafo es necesario utilizar TypeScript
 export default defineComponent({
   name: "Grafo",
   props: { datosOk: Object, aristasConj: String },
@@ -51,6 +52,7 @@ export default defineComponent({
       },
     };
 
+    // Nombre de cada vertice
     const nodes = {
       node1: { name: "A" },
       node2: { name: "B" },
@@ -59,6 +61,7 @@ export default defineComponent({
       node5: { name: "E" },
     };
 
+    // Posiciones para cada vertice
     const layouts: Layouts = {
       nodes: {
         node1: { x: 10, y: 140 },
@@ -69,6 +72,7 @@ export default defineComponent({
       },
     };
 
+    // Aristas iniciales
     const edges = {
       edge1: { source: "node1", target: "node4" },
       edge2: { source: "node2", target: "node3" },
@@ -84,6 +88,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.container {
+  width: 50%;
+}
+
 .resultado {
   color: #42b983;
   font-size: 20px;

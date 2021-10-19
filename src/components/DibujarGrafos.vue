@@ -5,17 +5,17 @@
       <table class="table table-bordered texto">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">A</th>
-            <th scope="col">B</th>
-            <th scope="col">C</th>
-            <th scope="col">D</th>
-            <th scope="col">E</th>
+            <th scope="col" class="grey">#</th>
+            <th scope="col" class="grey">A</th>
+            <th scope="col" class="grey">B</th>
+            <th scope="col" class="grey">C</th>
+            <th scope="col" class="grey">D</th>
+            <th scope="col" class="grey">E</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">A</th>
+            <th scope="row" class="grey">A</th>
             <td>
               <input
                 type="number"
@@ -74,7 +74,7 @@
           </tr>
 
           <tr>
-            <th scope="row">B</th>
+            <th scope="row" class="grey">B</th>
             <td>
               <input
                 type="number"
@@ -133,7 +133,7 @@
           </tr>
 
           <tr>
-            <th scope="row">C</th>
+            <th scope="row" class="grey">C</th>
             <td>
               <input
                 type="number"
@@ -192,7 +192,7 @@
           </tr>
 
           <tr>
-            <th scope="row">D</th>
+            <th scope="row" class="grey">D</th>
             <td>
               <input
                 type="number"
@@ -251,7 +251,7 @@
           </tr>
 
           <tr>
-            <th scope="row">E</th>
+            <th scope="row" class="grey">E</th>
             <td>
               <input
                 type="number"
@@ -313,7 +313,7 @@
       <button type="submit" class="btn btn-primary mt-3">Generar Grafo</button>
     </form>
 
-    <!-- Grafo -->
+    <!-- Componente Grafo -->
     <Grafo :datosOk="edges" :aristasConj="conjuntoAristas" />
   </div>
 </template>
@@ -363,9 +363,10 @@ export default {
   components: { Grafo },
   methods: {
     dibujar() {
-      console.log("DIBUJAR");
+      // console.log("DIBUJAR");
       this.conjuntoAristas = "{ ";
 
+      // Guarda los valores de cada posicion de la tabla puede ser 0 o 1
       this.datos = [
         { AA: this.AA, AB: this.AB, AC: this.AC, AD: this.AD, AE: this.AE },
         { BA: this.BA, BB: this.BB, BC: this.BC, BD: this.BD, BE: this.BE },
@@ -374,12 +375,13 @@ export default {
         { EA: this.EA, EB: this.EB, EC: this.EC, ED: this.ED, EE: this.EE },
       ];
 
+      // Por cada posicion se ha la validacion para obtener la conexion entre vertices
       this.datos.forEach((element, index) => {
         for (const key in element) {
           if (element[key] == 1) {
-            // console.log(`source ${key[0]} -- target ${key[1]}`);
+            // Genera el conjunto del Aristas
             this.conjuntoAristas += `(${key[0]}, ${key[1]}), `;
-
+            // Genera los nombres de los vertices
             this.edges[`edge${this.n[key[0]]}${this.n[key[1]]}`] = {
               source: this.n[key[0]],
               target: this.n[key[1]],
@@ -389,15 +391,15 @@ export default {
       });
 
       this.conjuntoAristas += " }";
-      console.log(this.conjuntoAristas);
-
+      // console.log(this.conjuntoAristas);
+      // Actualizamos datos
       this.$forceUpdate();
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   width: 50%;
 }
@@ -425,12 +427,22 @@ input[type="number"]::-webkit-outer-spin-button {
 
 table {
   table-layout: fixed;
-  width: 10px;
+  /* width: 10px; */
 }
 
 th,
 td {
   width: 10px;
   overflow: hidden;
+}
+
+.grey {
+  background-color: rgba(128, 128, 128, 0.25);
+}
+.red {
+  background-color: rgba(255, 0, 0, 0.25);
+}
+.blue {
+  background-color: rgba(0, 0, 255, 0.25);
 }
 </style>

@@ -1,4 +1,9 @@
 {
+  "author": {
+    "name": "Mario Monroy",
+    "email": "mmonroyc4@miumg.edu.gt",
+    "url": "https://github.com/monroy95/matematica-discreta"
+  },
   "name": "matematica-discreta",
   "version": "0.1.0",
   "private": true,

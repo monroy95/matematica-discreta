@@ -183,14 +183,14 @@ h2 span {
   /* animation: escribir 10s steps(30) infinite alternate;  DESCOMENTAR PARA EFECTO MAQUINA ESCRIBIR*/
 }
 
-@keyframes escribir {
+/* @keyframes escribir {
   from {
     width: 100%;
   }
   to {
     width: 0;
   }
-}
+} */
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
