@@ -1,10 +1,19 @@
 <template>
   <!-- test -->
   <p class="mt-4 texto">
-    Con la rueda central del mouse puede acercar o alejar el Grafo, tambien
-    puede cambiar las posiciones arrastrando cada vertice.
+    Con la rueda central del mouse puede acercar o alejar el Grafo, también
+    puede cambiar las posiciones arrastrando cada vértice.
   </p>
   <p class="resultado">Conjunto Aristas: {{ aristasConj }}</p>
+  <p class="resultado">
+    Distancia entre primer y último vértice: {{ distancia }}
+  </p>
+  <p class="resultado">
+    {{ grados }}
+  </p>
+  <p class="resultado">
+    {{ isConexo }}
+  </p>
   <!-- <code>{{ datosOk }}</code> -->
   <v-network-graph
     class="texto"
@@ -12,6 +21,7 @@
     :edges="datosOk || edges"
     :layouts="layouts"
     :configs="configs"
+    :zoom-level="3"
   />
 </template>
 
@@ -23,17 +33,23 @@ import { UserConfigs, NodeLabelDirection } from "v-network-graph";
 // Para renderizar el grafo es necesario utilizar TypeScript
 export default defineComponent({
   name: "Grafo",
-  props: { datosOk: Object, aristasConj: String },
+  props: {
+    datosOk: Object,
+    aristasConj: String,
+    grados: String,
+    distancia: Number,
+    isConexo: String,
+  },
   setup(props) {
     const configs: UserConfigs = {
       node: {
         selectable: true,
         normal: {
           radius: 20,
-          color: "#6013ad",
+          color: "#ff6954",
         },
         hover: {
-          color: "#430d78",
+          color: "#ff5362",
         },
         label: {
           fontSize: 12,
@@ -44,10 +60,10 @@ export default defineComponent({
       edge: {
         normal: {
           width: 3,
-          color: "#58139c",
+          color: "#ffca62",
         },
         hover: {
-          color: "#3a0d66",
+          color: "#ff6954",
         },
       },
     };
@@ -95,5 +111,6 @@ export default defineComponent({
 .resultado {
   color: #42b983;
   font-size: 20px;
+  font-weight: bolder;
 }
 </style>

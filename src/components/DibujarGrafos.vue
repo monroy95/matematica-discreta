@@ -1,8 +1,10 @@
 <template>
   <div class="container">
+    <!-- Matriz de adyacencia -->
     <p class="texto">Las celdas solo aceptan el valor de 0 o 1</p>
     <form class="row g-3" @submit.prevent="dibujar">
       <table class="table table-bordered texto">
+        <!-- Cabeceras de tabla -->
         <thead>
           <tr>
             <th scope="col" class="grey">#</th>
@@ -13,6 +15,7 @@
             <th scope="col" class="grey">E</th>
           </tr>
         </thead>
+        <!-- Cuerpo de tabla -->
         <tbody>
           <tr>
             <th scope="row" class="grey">A</th>
@@ -314,7 +317,13 @@
     </form>
 
     <!-- Componente Grafo -->
-    <Grafo :datosOk="edges" :aristasConj="conjuntoAristas" />
+    <Grafo
+      :datosOk="edges"
+      :aristasConj="conjuntoAristas"
+      :grados="grados"
+      :distancia="distancia"
+      :isConexo="isConexo"
+    />
   </div>
 </template>
 
@@ -358,6 +367,9 @@ export default {
       datos: [],
       edges: {},
       conjuntoAristas: "",
+      grados: "",
+      distancia: "",
+      isConexo: "",
     };
   },
   components: { Grafo },
@@ -392,6 +404,51 @@ export default {
 
       this.conjuntoAristas += " }";
       // console.log(this.conjuntoAristas);
+
+      // Calculo de grados de cada vertice
+      let gradoA = [...this.conjuntoAristas]
+        .map((i) => !!~i.indexOf("A"))
+        .filter((i) => i).length;
+
+      let gradoB = [...this.conjuntoAristas]
+        .map((i) => !!~i.indexOf("B"))
+        .filter((i) => i).length;
+
+      let gradoC = [...this.conjuntoAristas]
+        .map((i) => !!~i.indexOf("C"))
+        .filter((i) => i).length;
+
+      let gradoD = [...this.conjuntoAristas]
+        .map((i) => !!~i.indexOf("D"))
+        .filter((i) => i).length;
+
+      let gradoE = [...this.conjuntoAristas]
+        .map((i) => !!~i.indexOf("E"))
+        .filter((i) => i).length;
+
+      if (
+        gradoA == 0 ||
+        gradoA == 1 ||
+        gradoB == 0 ||
+        gradoB == 1 ||
+        gradoC == 0 ||
+        gradoC == 1 ||
+        gradoD == 0 ||
+        gradoD == 1 ||
+        gradoE == 0 ||
+        gradoE == 1
+      ) {
+        this.isConexo = "No es conexo";
+      } else {
+        this.isConexo = "Es conexo";
+      }
+
+      this.grados = `Grado Vértice A=${gradoA}. Grado Vértice B=${gradoB}. Grado Vértice C=${gradoC}. Grado Vértice D=${gradoD}. Grado Vértice E=${gradoE}.`;
+
+      this.distancia = [...this.conjuntoAristas]
+        .map((i) => !!~i.indexOf("("))
+        .filter((i) => i).length;
+
       // Actualizamos datos
       this.$forceUpdate();
     },
